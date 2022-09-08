@@ -17,11 +17,11 @@ export const TikTokProvider = ({ children }) => {
 
       setTikToks(data)
     })()
-    console.log(tiktoks)
+    // console.log(tiktoks)  //eslint-disable-line
   }, [])
 
   const getTiktoks = async () => {
-    console.log('fetching')
+    // console.log('fetching')  //eslint-disable-line
 
     const res = await axios.get(
       'https://ipfs.io/ipfs/QmS28E89P3Gz2LZimkKSuJgXGuZEtXG6dhyzxkSbpv6mKU/tiktoks.json',
@@ -36,7 +36,7 @@ export const TikTokProvider = ({ children }) => {
 
   const signup = async (username, profile) => {
     if (!connected) {
-      alert('Connect wallet first')
+      alert('Connect wallet first')  //eslint-disable-line
       return
     }
 
@@ -52,7 +52,7 @@ export const TikTokProvider = ({ children }) => {
 
     try {
       const userInfo = await program.account.userAccount.fetch(user_pda)
-      console.log(userInfo)
+      // console.log(userInfo)  //eslint-disable-line
     } catch (e) {}
   }
 

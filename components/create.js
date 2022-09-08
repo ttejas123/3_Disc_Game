@@ -10,7 +10,7 @@ function Create({metaplex}) {
 
     const createNFT = async() => {
         try {
-            console.log(createData)
+            // console.log(createData) //eslint-disable-line
             setUploading(true);
 
             const nft = await metaplex
@@ -19,11 +19,11 @@ function Create({metaplex}) {
                 ...makes
             })
             .run();
-            console.log(nft)
-            alert("Your NFT is Created!")
+            // console.log(nft) //eslint-disable-line
+            alert("Your NFT is Created!")  //eslint-disable-line
             setUploading(false);
         } catch(err) {
-            window.alert("Ohh Sorry ⚠️ we Failed")
+            window.alert("Ohh Sorry ⚠️ we Failed")  //eslint-disable-line
             setUploading(false);
             setShow(false);
         }
@@ -32,7 +32,7 @@ function Create({metaplex}) {
     const getData = async(uri = "") => {
         try{
             const fetch = await axios.get(uri);
-            console.log(fetch)
+            // console.log(fetch)  //eslint-disable-line
             setCreateData({...fetch.data})
             const make = {
                 uri: uri,
@@ -56,7 +56,7 @@ function Create({metaplex}) {
             setMake(make);
             setShow(true);
         } catch(err){
-            alert("Ohh Sorry ⚠️ we Failed")
+            alert("Ohh Sorry ⚠️ we Failed")  //eslint-disable-line
         }
     }
 

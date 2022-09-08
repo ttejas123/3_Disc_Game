@@ -34,7 +34,7 @@ const MainView = () => {
     connection,
   })
 
-  // console.log(walletData)
+  // console.log(walletData)  //eslint-disable-line
 
   const [address, setAddress] = useState(
     "Fc5cN1JHai5YCoeEq2vQPDwANopQrN9sX1wE5j8QYh2K"
@@ -53,11 +53,11 @@ const MainView = () => {
     // const mintAddress = new PublicKey("9AdTJhWxV7snnLuSx6EAiSN8Tucq8Bu2WiWS5He72yhh");
     // const task = metaplex.nfts().findByMint({ mintAddress });
     // const nft = await task.run();
-    // console.log(nft.uri)
+    // console.log(nft.uri)  //eslint-disable-line
 
     // const nftMetaData = await axios.get(nft.uri);
 
-    // console.log(metaD) 
+    // console.log(metaD)   //eslint-disable-line
   };
 
   const createNFTMetaData = async () => {
@@ -69,7 +69,7 @@ const MainView = () => {
         image: "https://arweave.net/_pwkP3t4H9lnSpIZa6v9SVwRManmi_gVL6KqqFlrjq0",
     })
     .run();
-    console.log(metaD)
+    // console.log(metaD)  //eslint-disable-line
     const nft = await metaplex
     .nfts()
     .create({
@@ -79,7 +79,7 @@ const MainView = () => {
     })
     .run();
 
-    console.log(nft)
+    // console.log(nft)  //eslint-disable-line
   }
 
   const handleFileChange = async (event) => {
@@ -104,7 +104,7 @@ const MainView = () => {
         if (file) {
           // metaplex.storage().upload(file)
           const uri = await metaplex.storage().upload(file);
-          console.log(uri);
+          // console.log(uri);  //eslint-disable-line
           if (uri) {
             setUri(uri);
             setFileIsSelected(false);
@@ -116,7 +116,7 @@ const MainView = () => {
   
         }
       } catch(err) {
-          // console.log(err)
+          // console.log(err)  //eslint-disable-line
           setError(err);
           setUploading(false);
       }

@@ -34,7 +34,7 @@ function Metadata({metaplex}) {
         .nfts()
         .uploadMetadata(data)
         .run();
-        console.log(metaD.uri)
+        // console.log(metaD.uri)  //eslint-disable-line
         setResult(metaD.uri+"");
     }
     return (
@@ -77,7 +77,7 @@ function Metadata({metaplex}) {
                             <div className='text-xl font-semibold'>Attributes</div>
                         {attributesList.map((x, i) => {
                             return (
-                                <div className="md:flex items-center mt-2">
+                                <div key={i} className="md:flex items-center mt-2">
                                 <div className="flex flex-col mx-2 w-[45%]">
                                     <label className="font-bold text-gray-700">Trait type</label>
                                     <input
@@ -120,7 +120,7 @@ function Metadata({metaplex}) {
                             ...data,
                             attributes: attcheck
                         });
-                        // console.log(attributesList);
+                        // console.log(attributesList);  //eslint-disable-line
                     }}>Submit</div>
                 </div>
         </div>

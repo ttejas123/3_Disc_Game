@@ -18,9 +18,9 @@ function Gallery({gallery, setGallery}) {
                             
                                 clip.map((val, index) => {
                                     return (
-                                        <img className='flex-col p-3 w-[100px] h-[100px] cursor-pointer' src={val} onClick={()=> {
+                                        <img key={index} className='flex-col p-3 w-[100px] h-[100px] cursor-pointer' src={val} onClick={()=> {
                                                 navigator.clipboard.writeText(val+"");
-                                                window.alert("Copied To Clipboard");
+                                                window.alert("Copied To Clipboard");  //eslint-disable-line
                                             }
                                         } />
                                     )

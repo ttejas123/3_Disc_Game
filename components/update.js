@@ -20,7 +20,7 @@ function Update({metaplex, connection}) {
         connection,
     })
 
-    // console.log(walletData)
+    // console.log(walletData)  //eslint-disable-line
 
     const fetchNFTData = async(NFTADRESS) => {
             
@@ -37,13 +37,13 @@ function Update({metaplex, connection}) {
                 createRaster.push(nft);
             })
             
-            // console.log(createRaster)
+            // console.log(createRaster)  //eslint-disable-line
         } catch(err) {
-            alert("Ohh Sorry ⚠️ we Failed")
+            alert("Ohh Sorry ⚠️ we Failed")  //eslint-disable-line
         }
     }
     
-    // console.log(walletData)
+    // console.log(walletData)  //eslint-disable-line
 
     const updateNFT = async() => {
         try {
@@ -61,11 +61,11 @@ function Update({metaplex, connection}) {
                 uri: metaC.current.value,
             });
             UpdatedOne = await UpdatedOne.run()
-            console.log(`https://solscan.io/token/${mintAddress}?cluster=devnet`);
-            alert("Your NFT is Updated!")
+            console.log(`https://solscan.io/token/${mintAddress}?cluster=devnet`);  //eslint-disable-line
+            alert("Your NFT is Updated!")  //eslint-disable-line
             setUploading(false);
         } catch(err) {
-            window.alert("Ohh Sorry ⚠️ we Failed")
+            window.alert("Ohh Sorry ⚠️ we Failed")  //eslint-disable-line
             setUploading(false);
             setShow(false);
         }
@@ -74,7 +74,7 @@ function Update({metaplex, connection}) {
     const getData = async(uri = "") => {
         try{
             const fetch = await axios.get(uri);
-            console.log(fetch)
+            // console.log(fetch)  //eslint-disable-line
             setCreateData({...fetch.data})
             const make = {
                 uri: uri,
@@ -98,7 +98,7 @@ function Update({metaplex, connection}) {
             setMake(make);
             setShow(true);
         } catch(err){
-            alert("Ohh Sorry ⚠️ we Failed")
+            alert("Ohh Sorry ⚠️ we Failed")  //eslint-disable-line
         }
     }
 
@@ -108,12 +108,12 @@ function Update({metaplex, connection}) {
             setData(mintAddress)
             const task = metaplex.nfts().findByMint({ mintAddress });
             const nft = await task.run();
-            console.log(nft.json)
+            // console.log(nft.json)  //eslint-disable-line
             setCreateData(nft.json)
             setShow(true)
         } catch(err) {
-            // console.log(err)
-            window.alert("Ohh Sorry ⚠️ we Failed")
+            // console.log(err)  //eslint-disable-line
+            window.alert("Ohh Sorry ⚠️ we Failed")  //eslint-disable-line
         }
     }
 
@@ -173,7 +173,7 @@ function Update({metaplex, connection}) {
                 {
                     allData.map((val, index) => {
                         return (
-                            <div className='m-2' onClick={()=> fetchNFT(val.address.toString())}>
+                            <div key={index} className='m-2' onClick={()=> fetchNFT(val.address.toString())}>
                                <div className='img w-[70px] h-[70px]'><img src={val.json.image} /></div>
                                <div className='Name'>{val.json.name}</div>
                             </div>

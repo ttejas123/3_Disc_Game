@@ -9,7 +9,7 @@ import { Metaplex, bundlrStorage, toMetaplexFileFromBrowser, walletAdapterIdenti
 import { Connection, clusterApiUrl, Keypair, PublicKey, LAMPORTS_PER_SOL } from "@solana/web3.js";
 
 const DropFileInput = props => {
-    // console.log(uploadImg.src)
+    // console.log(uploadImg.src) //eslint-disable-line
     const wrapperRef = useRef(null);
     const wallet = useWallet()
     //"mainnet-beta" 
@@ -19,7 +19,7 @@ const DropFileInput = props => {
     // connection,
     // })
 
-    // console.log(walletData)
+    // console.log(walletData)  //eslint-disable-line
     const metaplex = Metaplex.make(connection)
     .use(walletAdapterIdentity(wallet))
     .use(bundlrStorage({

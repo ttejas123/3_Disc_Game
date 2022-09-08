@@ -26,21 +26,21 @@ const useTiktok = (
   const connection = new anchor.web3.Connection(SOLANA_HOST)
   const program = getProgramInstance(connection, wallet)
   const getTiktoks = async () => {
-    console.log('fetching')
+    // console.log('fetching')  //eslint-disable-line
 
     const videos = await program.account.videoAccount.all()
-    console.log(videos)
+    // console.log(videos)  //eslint-disable-line
 
     // const res = await axios.get(
     //   'https://ipfs.io/ipfs/QmS28E89P3Gz2LZimkKSuJgXGuZEtXG6dhyzxkSbpv6mKU/tiktoks.json',
     // )
-    // setTikToks(res.data);
+    // setTikToks(res.data);  //eslint-disable-line
 
     setTikToks(videos)
   }
 
   const likeVideo = async index => {
-    console.log(index+ "Linked Video")
+    // console.log(index+ "Linked Video")  //eslint-disable-line
     let [video_pda] = await anchor.web3.PublicKey.findProgramAddress(
       [utf8.encode('video'), new BN(index).toArrayLike(Buffer, 'be', 8)],
       program.programId,
@@ -54,7 +54,7 @@ const useTiktok = (
       },
     })
 
-    console.log(tx)
+    // console.log(tx)  //eslint-disable-line
   }
 
   const createComment = async (index, count, comment) => {
@@ -86,7 +86,7 @@ const useTiktok = (
           },
         },
       )
-      console.log(tx)
+      // console.log(tx)  //eslint-disable-line
     }
   }
 
@@ -118,7 +118,7 @@ const useTiktok = (
       },
     )
 
-    console.log(tx)
+    // console.log(tx)  //eslint-disable-line
 
     setDescription('')
     setVideoUrl('')
@@ -143,7 +143,7 @@ const useTiktok = (
     const comments = await program.account.commentAccount.fetchMultiple(
       commentSigners,
     )
-    console.log(comments)
+    // console.log(comments)  //eslint-disable-line
     return comments
   }
   return { getTiktoks, likeVideo, createComment, newVideo, getComments }

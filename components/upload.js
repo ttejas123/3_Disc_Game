@@ -16,7 +16,7 @@ function Upload({metaplex, gallery, setGallery}) {
             let Cfile = await toMetaplexFileFromBrowser(file);
             if (Cfile) {
               const uri = await metaplex.storage().upload(Cfile);
-              console.log(uri);
+            //   console.log(uri);  //eslint-disable-line
               if (uri) {
                 let prev = JSON.parse(window.localStorage.getItem("NFT_IMG"))
                 if(prev) window.localStorage.setItem("NFT_IMG", JSON.stringify([...prev, uri]));
@@ -26,7 +26,7 @@ function Upload({metaplex, gallery, setGallery}) {
               setGallery(!gallery)
             }
         } catch(err) {
-              window.alert("Ohh Sorry ⚠️ we Failed")
+              window.alert("Ohh Sorry ⚠️ we Failed")  //eslint-disable-line
               setUploading(false);
         }
     }
