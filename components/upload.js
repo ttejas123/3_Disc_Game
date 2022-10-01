@@ -2,6 +2,7 @@ import { useState } from 'react';
 import style from '../styles/upload.module.css';
 import DropFileInput from './DropFileInput';
 import { toMetaplexFileFromBrowser } from '@metaplex-foundation/js';
+import axios from 'axios';
 
 function Upload({metaplex, gallery, setGallery}) {
     const [file, setFile] = useState('');
@@ -13,18 +14,23 @@ function Upload({metaplex, gallery, setGallery}) {
     const uploadHit = async() => {
         try{
             setUploading(true);
-            let Cfile = await toMetaplexFileFromBrowser(file);
-            if (Cfile) {
-              const uri = await metaplex.storage().upload(Cfile);
-            //   console.log(uri);  //eslint-disable-line
-              if (uri) {
+            const config = {
+                headers: { "authorization": `Bearer ${window.localStorage.getItem("access_token")}` }
+            };
+            let formData = new FormData();    //formdata object
+            formData.append('file', file);
+            const dataComingDown = await axios.post('/api/upload', formData, config);
+            console.log(dataComingDown)
+            if(dataComingDown.status == 400) {
+                window.alert("Ohh Sorry ⚠️ we Failed") //eslint-disable-line
+            } else if(dataComingDown.status == 200){
+                const uri = dataComingDown.data.uri;
                 let prev = JSON.parse(window.localStorage.getItem("NFT_IMG"))
                 if(prev) window.localStorage.setItem("NFT_IMG", JSON.stringify([...prev, uri]));
                 else window.localStorage.setItem("NFT_IMG", JSON.stringify([uri]))
-              }
-              setUploading(false);
-              setGallery(!gallery)
             }
+            setUploading(false);
+            setGallery(!gallery)
         } catch(err) {
               window.alert("Ohh Sorry ⚠️ we Failed")  //eslint-disable-line
               setUploading(false);

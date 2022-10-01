@@ -3,6 +3,7 @@ import { useWallet } from '@solana/wallet-adapter-react'
 import { TOKEN_PROGRAM_ID } from '@solana/spl-token'
 import {SOLANA_HOST} from '../utils/const'
 import Gallery from './gallery'
+import NFTGallery from './nft_gallery'
 import Navbar from './navbar'
 import Upload from './upload'
 import Metadata from './metadata'
@@ -12,7 +13,7 @@ import { Connection, clusterApiUrl, Keypair, PublicKey, LAMPORTS_PER_SOL } from 
 import axios from 'axios'
 import { useWalletNfts, NftTokenAccount } from "@nfteyez/sol-rayz-react";
 import Create from './create'
-import Update from './update'
+import CreateSFTS from './createSFTs'
 const anchor = require('@project-serum/anchor')
 
 const MainView = () => {
@@ -29,6 +30,7 @@ const MainView = () => {
 
   const [tab, setTab] = useState(0);
   const [gallery, setGallery] = useState(false);
+  const [nftgallery, setNftGallery] = useState(false);
   const walletData = useWalletNfts({
     publicAddress: wallet.publicKey.toString(),
     connection,
@@ -103,16 +105,20 @@ const MainView = () => {
         setUploading(true);
         if (file) {
           // metaplex.storage().upload(file)
-          const uri = await metaplex.storage().upload(file);
-          // console.log(uri);  //eslint-disable-line
-          if (uri) {
-            setUri(uri);
-            setFileIsSelected(false);
-            setUploading(false);
-            let prev = JSON.parse(window.localStorage.getItem("NFT_IMG"))
-            if(prev) window.localStorage.setItem("NFT_IMG", JSON.stringify([...prev, uri]));
-            else window.localStorage.setItem("NFT_IMG", JSON.stringify([uri]))
-          }
+          let formData = new FormData();    //formdata object
+          formData.append('file', file);
+          
+          const dataComingDown = axios.post('http://localhost:8080/upload', {data:formData});
+          // const uri = await metaplex.storage().upload(file);
+          // // console.log(uri);  //eslint-disable-line
+          // if (uri) {
+          //   setUri(uri);
+          //   setFileIsSelected(false);
+          //   setUploading(false);
+          //   let prev = JSON.parse(window.localStorage.getItem("NFT_IMG"))
+          //   if(prev) window.localStorage.setItem("NFT_IMG", JSON.stringify([...prev, uri]));
+          //   else window.localStorage.setItem("NFT_IMG", JSON.stringify([uri]))
+          // }
   
         }
       } catch(err) {
@@ -124,12 +130,20 @@ const MainView = () => {
 
   return (
     <>
-      <Navbar tab={tab} setTab={setTab} setGallery={setGallery} />
+      <Navbar tab={tab} setTab={setTab} setGallery={setGallery}  nftgallery={nftgallery} setNftGallery={setNftGallery} connection={connection} />
 
       {
         gallery && (
                   <div className='w-full absolute top-0 left-0  flex justify-center items-center h-full z-50'>
                       <Gallery gallery={gallery} setGallery={setGallery} />
+                  </div>
+        )
+      }
+
+      {
+        nftgallery && (
+                  <div className='w-full absolute top-0 left-0  flex justify-center items-center h-full z-50'>
+                      <NFTGallery gallery={nftgallery} setGallery={setNftGallery} />
                   </div>
         )
       }
@@ -161,7 +175,7 @@ const MainView = () => {
       { 
         tab == 3 && (
           <div className='flex justify-center w-full bg-red'>
-            <div className='flex justify-center w-[60%] bg-green'><Update metaplex={metaplex} connection={connection} /></div>
+            <div className='flex justify-center w-[60%] bg-green'><CreateSFTS metaplex={metaplex} connection={connection} /></div>
           </div>
         )
       }

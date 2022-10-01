@@ -1,31 +1,37 @@
+import { useState } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import axios from 'axios';
-import React, { useState } from 'react'
-import NFTcreate from './createNFT'
+import U_sft from './u_sft'
+import M_sft from './m_sft'
 
-function Create({metaplex}) {
-    const [data, setData] = useState({});
+
+function Upload({metaplex, c_upload, setc_upload}) {
+
     const wallet = useWallet();
     const [show, setShow] = useState(false);
     const [createData, setCreateData] = useState({});
     const [makes, setMake] = useState({});
     const [uploading, setUploading] = useState(false);
-    const [c_upload, setc_upload] = useState(false);
+    const [tab, setTab] = useState(0);
+    const [imgToSet, setimgToSet] = useState("");
+    const [finalData, setFinalData] = useState({})
 
-    const createNFT = async() => {
+    const createSFT = async() => {
         try {
             setUploading(true);
-            console.log(makes)
+            // console.log(finalData)
             const config = {
                 headers: { "authorization": `Bearer ${window.localStorage.getItem("access_token")}` }
             };
-            const data = await axios.post('/api/create_nft', {
+            console.log(makes)
+            const data = await axios.post('/api/spl-token', {
                 "data": makes,
                 "auth": wallet.publicKey.toString()
             }, config)
 
             if(data.status == 200){
-                alert("Your NFT is Created!")  //eslint-disable-line
+                alert("Your SFT is Created!")  //eslint-disable-line
+                setc_upload(!c_upload)
             } else {
                 window.alert("Ohh Sorry ⚠️ we Failed")  //eslint-disable-line
             }
@@ -58,8 +64,8 @@ function Create({metaplex}) {
                 make["symbol"] = fetch.data.symbol;
             }
 
-            if(fetch.data.external_url != null){
-                make["external_url"] = fetch.data.external_url;
+            if(fetch.data.amount != null){
+                make["amount"] = fetch.data.amount;
             }
 
             setMake(make);
@@ -70,41 +76,28 @@ function Create({metaplex}) {
     }
 
     return (
-    <div className='flex flex-col justify-center items-center h-[80vh] w-full relative'>
-        <>
-        {
-            c_upload && (
-                <div className='h-full w-full absolute '>
-                    <NFTcreate metaplex={metaplex} c_upload={c_upload} setc_upload={setc_upload} />
-                </div>
-            )
-        }
-        </>
+        <div className='h-full'>
+            { 
+                tab == 0 && (<U_sft metaplex={metaplex} setTab={setTab} setimgToSet={setimgToSet} />)
+            }
 
-        <>
-        {
-            !show && (<div className='flex w-full justify-center items-center'>
- 
- 🦊 Create NFT without uri
-                 
-                    <div className="mt-5 bg-blue-50 ml-5 px-5 py-2 rounded-md text-center cursor-pointer mb-5" onClick={()=> setc_upload(!c_upload)}>➜</div>
-            </div>)
-        }
-        </>
-        {
-            show ? (<div className='w-[50%]'>
-                <div className='flex'>
-                    {createData.image != null && (<img src={createData.image} className="w-[100px] h-[100px]" />)}
-                    <div className='flex justify-center items-center flex-col ml-5'>
-                        <div className='font-semibold'>Name: {createData.name != null && (<>{createData.name}</>)}</div>
-                        <div className='font-semibold'>Royalty: {createData.seller_fee_basis_points != null && (<>{createData.seller_fee_basis_points / 100}  %</>)}</div>
+            { 
+                tab == 1 && (<M_sft metaplex={metaplex} imgToSet={imgToSet} setTab={setTab} getData={getData} setFinalData={setFinalData} />)
+            }
+
+            { 
+                tab == 2 && (<div className='bg-white w-full h-full flex justify-center items-center'>
+                    <div className='w-[50%]'>
+                    <div className='flex'>
+                        {createData.image != null && (<img src={createData.image} className="w-[100px] h-[100px]" />)}
+                        <div className='flex justify-center items-center flex-col ml-5'>
+                            <div className='font-semibold'>Name: {createData.name != null && (<>{createData.name}</>)}</div>
+                            <div className='font-semibold'>Royalty: {createData.seller_fee_basis_points != null && (<>{createData.seller_fee_basis_points / 100}  %</>)}</div>
+                        </div>
                     </div>
-
-                    
-                </div>
                 <div className='flex mt-5 justify-between' >
-                    <div className='bg-red-500 p-2 w-[50%] mr-2 text-center rounded-md cursor-pointer' onClick={()=> setShow(false)}>Back Off</div>
-                    <div className='bg-green-500 p-2 w-[50%] ml-2 text-center rounded-md cursor-pointer' onClick={()=> createNFT()}>
+                    <div className='bg-red-500 p-2 w-[50%] mr-2 text-center rounded-md cursor-pointer' onClick={()=> setc_upload(false)}>Back Off</div>
+                    <div className='bg-green-500 p-2 w-[50%] ml-2 text-center rounded-md cursor-pointer' onClick={()=> createSFT()}>
                         <>{uploading && (<>
                         <svg role="status" className="inline mr-3 w-4 h-4 text-black animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#E5E7EB" />
@@ -114,18 +107,11 @@ function Create({metaplex}) {
                         Go Ahead
                     </div>
                 </div>
-            </div>) : (<>
-                <input className='text-center bg-white border w-[80%] py-2 rounded-md ' placeholder='Meta Data URI' onChange={(e)=> {
-                    setData({
-                        ...data,
-                        ["uri"]: e.target.value
-                    })
-                }} />
-                <div className="w-[30%] mt-5 bg-blue-50 px-2 py-2 rounded-md text-center cursor-pointer" onClick={()=> getData(data.uri)}>Fetch</div>
-            </>)
-        }
-    </div>
-    )
+            </div>
+                </div>)
+            }
+        </div>
+    );
 }
 
-export default Create
+export default Upload;

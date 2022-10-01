@@ -1,16 +1,19 @@
+import { useState } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import axios from 'axios';
-import React, { useState } from 'react'
-import NFTcreate from './createNFT'
+import C_nft from './c_nft'
+import M_nft from './m_nft'
 
-function Create({metaplex}) {
-    const [data, setData] = useState({});
+
+function Upload({metaplex, c_upload, setc_upload}) {
+
     const wallet = useWallet();
     const [show, setShow] = useState(false);
     const [createData, setCreateData] = useState({});
     const [makes, setMake] = useState({});
     const [uploading, setUploading] = useState(false);
-    const [c_upload, setc_upload] = useState(false);
+    const [tab, setTab] = useState(0);
+    const [imgToSet, setimgToSet] = useState("");
 
     const createNFT = async() => {
         try {
@@ -26,6 +29,7 @@ function Create({metaplex}) {
 
             if(data.status == 200){
                 alert("Your NFT is Created!")  //eslint-disable-line
+                setc_upload(!c_upload)
             } else {
                 window.alert("Ohh Sorry ⚠️ we Failed")  //eslint-disable-line
             }
@@ -70,29 +74,18 @@ function Create({metaplex}) {
     }
 
     return (
-    <div className='flex flex-col justify-center items-center h-[80vh] w-full relative'>
-        <>
-        {
-            c_upload && (
-                <div className='h-full w-full absolute '>
-                    <NFTcreate metaplex={metaplex} c_upload={c_upload} setc_upload={setc_upload} />
-                </div>
-            )
-        }
-        </>
+        <div className='h-full'>
+            { 
+                tab == 0 && (<C_nft metaplex={metaplex} setTab={setTab} setimgToSet={setimgToSet} />)
+            }
 
-        <>
-        {
-            !show && (<div className='flex w-full justify-center items-center'>
- 
- 🦊 Create NFT without uri
-                 
-                    <div className="mt-5 bg-blue-50 ml-5 px-5 py-2 rounded-md text-center cursor-pointer mb-5" onClick={()=> setc_upload(!c_upload)}>➜</div>
-            </div>)
-        }
-        </>
-        {
-            show ? (<div className='w-[50%]'>
+            { 
+                tab == 1 && (<M_nft metaplex={metaplex} imgToSet={imgToSet} setTab={setTab} getData={getData} />)
+            }
+
+            { 
+                tab == 2 && (<div className='bg-white w-full h-full flex justify-center items-center'>
+                    <div className='w-[50%]'>
                 <div className='flex'>
                     {createData.image != null && (<img src={createData.image} className="w-[100px] h-[100px]" />)}
                     <div className='flex justify-center items-center flex-col ml-5'>
@@ -103,7 +96,7 @@ function Create({metaplex}) {
                     
                 </div>
                 <div className='flex mt-5 justify-between' >
-                    <div className='bg-red-500 p-2 w-[50%] mr-2 text-center rounded-md cursor-pointer' onClick={()=> setShow(false)}>Back Off</div>
+                    <div className='bg-red-500 p-2 w-[50%] mr-2 text-center rounded-md cursor-pointer' onClick={()=> setc_upload(false)}>Back Off</div>
                     <div className='bg-green-500 p-2 w-[50%] ml-2 text-center rounded-md cursor-pointer' onClick={()=> createNFT()}>
                         <>{uploading && (<>
                         <svg role="status" className="inline mr-3 w-4 h-4 text-black animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -114,18 +107,11 @@ function Create({metaplex}) {
                         Go Ahead
                     </div>
                 </div>
-            </div>) : (<>
-                <input className='text-center bg-white border w-[80%] py-2 rounded-md ' placeholder='Meta Data URI' onChange={(e)=> {
-                    setData({
-                        ...data,
-                        ["uri"]: e.target.value
-                    })
-                }} />
-                <div className="w-[30%] mt-5 bg-blue-50 px-2 py-2 rounded-md text-center cursor-pointer" onClick={()=> getData(data.uri)}>Fetch</div>
-            </>)
-        }
-    </div>
-    )
+            </div>
+                </div>)
+            }
+        </div>
+    );
 }
 
-export default Create
+export default Upload;

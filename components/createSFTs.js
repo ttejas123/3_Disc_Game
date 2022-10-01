@@ -1,7 +1,7 @@
 import { useWallet } from '@solana/wallet-adapter-react';
 import axios from 'axios';
 import React, { useState } from 'react'
-import NFTcreate from './createNFT'
+import NFTcreate from './createSFT'
 
 function Create({metaplex}) {
     const [data, setData] = useState({});
@@ -19,13 +19,13 @@ function Create({metaplex}) {
             const config = {
                 headers: { "authorization": `Bearer ${window.localStorage.getItem("access_token")}` }
             };
-            const data = await axios.post('/api/create_nft', {
+            const data = await axios.post('/api/spl-token', {
                 "data": makes,
                 "auth": wallet.publicKey.toString()
             }, config)
 
             if(data.status == 200){
-                alert("Your NFT is Created!")  //eslint-disable-line
+                alert("Your SPL token is Created!")  //eslint-disable-line
             } else {
                 window.alert("Ohh Sorry ⚠️ we Failed")  //eslint-disable-line
             }
@@ -62,6 +62,10 @@ function Create({metaplex}) {
                 make["external_url"] = fetch.data.external_url;
             }
 
+            if(fetch.data.amount != null){
+                make["amount"] = fetch.data.amount;
+            }
+
             setMake(make);
             setShow(true);
         } catch(err){
@@ -85,10 +89,10 @@ function Create({metaplex}) {
         {
             !show && (<div className='flex w-full justify-center items-center'>
  
- 🦊 Create NFT without uri
-                 
-                    <div className="mt-5 bg-blue-50 ml-5 px-5 py-2 rounded-md text-center cursor-pointer mb-5" onClick={()=> setc_upload(!c_upload)}>➜</div>
-            </div>)
+ 🪙 Create SPL token without uri
+                            
+                               <div className="mt-5 bg-blue-50 ml-5 px-5 py-2 rounded-md text-center cursor-pointer mb-5" onClick={()=> setc_upload(!c_upload)}>➜</div>
+                       </div>)
         }
         </>
         {
@@ -114,15 +118,7 @@ function Create({metaplex}) {
                         Go Ahead
                     </div>
                 </div>
-            </div>) : (<>
-                <input className='text-center bg-white border w-[80%] py-2 rounded-md ' placeholder='Meta Data URI' onChange={(e)=> {
-                    setData({
-                        ...data,
-                        ["uri"]: e.target.value
-                    })
-                }} />
-                <div className="w-[30%] mt-5 bg-blue-50 px-2 py-2 rounded-md text-center cursor-pointer" onClick={()=> getData(data.uri)}>Fetch</div>
-            </>)
+            </div>) : (<></>)
         }
     </div>
     )

@@ -8,8 +8,8 @@ function Gallery({gallery, setGallery}) {
     }, [])
 
     return (
-        <div className='w-[50%] rounded-3xl bg-[#d4dff7] opacity-[95%] p-5 text-black flex flex-col justify-center items-center'>
-            <div className='grid gap-2 grid-cols-4'>
+        <div className='w-[50%] h-[50%] rounded-3xl bg-[#d4dff7] opacity-[95%] p-5 text-black flex flex-col justify-center items-center'>
+            <div className='grid gap-2 grid-cols-4 h-full overflow-y-scroll w-full'>
 
                 {
                     (clip != null && clip.length > 0) && (
