@@ -1,7 +1,7 @@
-import MainView from '../components/Mainview'
 import LoginSignUp from '../components/LoginSignUp'
 import { useEffect, useState } from 'react'
 import axios from 'axios';
+import EntryPoint from '../components/EntryPoint';
 
 export default function Home() {
   const [validUser, setValidUser] = useState(false);
@@ -26,7 +26,7 @@ export default function Home() {
   return (
     <div className='app'>
       {validUser ? (
-        <MainView />
+       <EntryPoint />
       ) : (
         <LoginSignUp setValidUser={setValidUser} validUser={validUser} />
       )}

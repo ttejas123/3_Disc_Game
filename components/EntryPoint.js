@@ -3,9 +3,7 @@ import Gallery from './Gallery'
 import Navbar from './Navbar'
 import Upload from './Upload'
 
-const anchor = require('@project-serum/anchor')
-
-const MainView = () => {
+function EntryPoint() {
   const [gallery, setGallery] = useState(false);
 
   return (
@@ -27,4 +25,4 @@ const MainView = () => {
     </>
   )
 }
-export default MainView
+export default EntryPoint
