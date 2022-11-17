@@ -1,11 +1,11 @@
 import { Schema, model, models } from 'mongoose';
 
-const userDataSchema = new Schema({
+const PostDataSchema = new Schema({
 	mail:{
 		type:String,
 	    required: true
 	},
-	password:{
+	url:{
 		type:String,
 	    required: true
 	},
@@ -17,5 +17,5 @@ const userDataSchema = new Schema({
 });
 
 
-const User = models.user || model("user", userDataSchema)
-export default User
+const Post = models.post || model("post", PostDataSchema)
+export default Post

@@ -1,10 +1,21 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
 function Gallery({gallery, setGallery}) {
     const [clip, setClip] = useState([])
     
     useEffect(()=> {
-        setClip(JSON.parse(window.localStorage.getItem("NFT_IMG")))
+        async function fetchUser(){
+            const mail = localStorage.getItem("mail");
+        
+            if(mail) {
+              axios.post('/api/fetchuserspost', {mail}).then(res => {
+                setClip(res.data.data)
+              })
+            }
+        }
+    
+        fetchUser();
     }, [])
 
     return (
@@ -17,9 +28,11 @@ function Gallery({gallery, setGallery}) {
                             {
                             
                                 clip.map((val, index) => {
+                                    const url = window.location.origin+"/"+val.url
+                                    console.log(url)
                                     return (
-                                        <img key={index} className='flex-col p-3 w-[100px] h-[100px] cursor-pointer' src={val} onClick={()=> {
-                                                navigator.clipboard.writeText(val+"");
+                                        <img key={index} className='flex-col p-3 w-[100px] h-[100px] cursor-pointer' src={url} onClick={()=> {
+                                                navigator.clipboard.writeText(url+"");
                                                 window.alert("Copied To Clipboard");  //eslint-disable-line
                                             }
                                         } />
