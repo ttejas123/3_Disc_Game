@@ -1,4 +1,4 @@
-import MainView from '../components/mainview'
+import MainView from '../components/Mainview'
 import LoginSignUp from '../components/LoginSignUp'
 import { useEffect, useState } from 'react'
 import axios from 'axios';
