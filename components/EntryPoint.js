@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import GalleryMain from './Gallery.js';
-import Navbar from './Navbar.js';
-import Upload from './Upload.js';
+import GalleryMain from './GalleryM.js';
+import Navbar from './NavbarM.js';
+import Upload from './UploadM.js';
 
 
 function EntryPoint() {

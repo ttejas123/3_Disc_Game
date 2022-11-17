@@ -3,7 +3,7 @@ import style from '../styles/upload.module.css';
 import DropFileInput from './DropFileInput';
 import axios from 'axios';
 
-export default function Upload({metaplex}) {
+export default function UploadM({metaplex}) {
     const [file, setFile] = useState('');
     const [uploading, setUploading] = useState(false);
     const onFileChange = async(files) => {

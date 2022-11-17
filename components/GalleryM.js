@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
-export default function GalleryMain({setGallery, gallery}) {
+export default function GalleryMainM({setGallery, gallery}) {
     const [clip, setClip] = useState([])
     
     useEffect(()=> {
