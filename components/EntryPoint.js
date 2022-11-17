@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import Gallery from './Gallery'
-import Navbar from './Navbar'
-import Upload from './Upload'
+import GalleryMain from './Gallery.js';
+import Navbar from './Navbar.js';
+import Upload from './Upload.js';
+
 
 function EntryPoint() {
   const [gallery, setGallery] = useState(false);
@@ -13,7 +14,7 @@ function EntryPoint() {
       {
         gallery ? (
                   <div className='w-full absolute top-0 left-0  flex justify-center items-center h-full z-50'>
-                      <Gallery gallery={gallery} setGallery={setGallery} />
+                      <GalleryMain gallery={gallery} setGallery={setGallery} />
                   </div>
         ) : (<></>)
       }

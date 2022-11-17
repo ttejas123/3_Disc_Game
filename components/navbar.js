@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Navbar({ setGallery }) {
+export default function Navbar({ setGallery }) {
   return (
     <div className={`p-2 mx-5 my-5 rounded-lg flex justify-between shadow-lg`}>
         <div className={`Left bg- flex  items-center ml-5 text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-violet-300 to-violet-500 cursor-pointer`} >DOBBY ADS</div>
@@ -25,5 +25,3 @@ function Navbar({ setGallery }) {
     </div>
   )
 }
-
-export default Navbar

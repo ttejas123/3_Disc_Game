@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
-function Gallery({gallery, setGallery}) {
+export default function GalleryMain({setGallery, gallery}) {
     const [clip, setClip] = useState([])
     
     useEffect(()=> {
@@ -53,5 +53,3 @@ function Gallery({gallery, setGallery}) {
         </div>
     )
 }
-
-export default Gallery

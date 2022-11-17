@@ -1,9 +1,9 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import style from '../styles/upload.module.css';
 import DropFileInput from './DropFileInput';
 import axios from 'axios';
 
-function Upload({metaplex, gallery, setGallery}) {
+export default function Upload({metaplex}) {
     const [file, setFile] = useState('');
     const [uploading, setUploading] = useState(false);
     const onFileChange = async(files) => {
@@ -24,16 +24,8 @@ function Upload({metaplex, gallery, setGallery}) {
                     window.alert("Uploded!")
                 }
             })
-            // if(dataComingDown.status == 400) {
-            //     window.alert("Ohh Sorry ⚠️ we Failed") //eslint-disable-line
-            // } else if(dataComingDown.status == 200){
-            //     const uri = dataComingDown.data.uri;
-            //     let prev = JSON.parse(window.localStorage.getItem("NFT_IMG"))
-            //     if(prev) window.localStorage.setItem("NFT_IMG", JSON.stringify([...prev, uri]));
-            //     else window.localStorage.setItem("NFT_IMG", JSON.stringify([uri]))
-            // }
             setUploading(false);
-            // setGallery(!gallery)
+            
         } catch(err) {
               window.alert("Ohh Sorry ⚠️ we Failed")  //eslint-disable-line
               setUploading(false);
@@ -63,5 +55,3 @@ function Upload({metaplex, gallery, setGallery}) {
         </div>
     );
 }
-
-export default Upload;

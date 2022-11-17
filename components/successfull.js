@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function Successfull({link, setResult}) {
+export default function Successfull({link, setResult}) {
     const [clip, setClip] = useState("")
   return (
     <div className='w-[50%] rounded-3xl bg-[#d4dff7] opacity-[90%] p-5 text-black flex flex-col justify-center items-center'>
@@ -19,6 +19,5 @@ function Successfull({link, setResult}) {
   )
 }
 
-export default Successfull
 
 
