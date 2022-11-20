@@ -1,8 +1,15 @@
+import dynamic from 'next/dynamic'
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
+
+  const CartProvider = dynamic(
+    () => import('../Context/Cart'),
+    { ssr: false },
+  )
+
   return (
-    <Component {...pageProps} />
+    <CartProvider><Component {...pageProps} /></CartProvider>
   )
 }
 

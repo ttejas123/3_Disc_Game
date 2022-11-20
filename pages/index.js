@@ -1,7 +1,7 @@
-import LoginSignUp from '../components/LoginSignUp'
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import EntryPoint from '../components/EntryPoint';
+import LoginSignUp from '../components/LoginSignUp'
 
 export default function Home() {
   const [validUser, setValidUser] = useState(false);
