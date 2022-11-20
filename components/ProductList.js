@@ -23,7 +23,7 @@ function ProductList() {
 
     <div className='grid grid-cols-4'>
         {list.map((val, i) => {
-            return (<Product Product_name={val.Name} Product_id={val._id} />)
+            return (<Product key={i} Product_name={val.Name} Product_id={val._id} />)
         })}
     </div>
 </div>
