@@ -5,7 +5,7 @@ const PostDataSchema = new Schema({
 		type:String,
 	    required: true
 	},
-	url:{
+	msgTouser:{
 		type:String,
 	    required: true
 	},

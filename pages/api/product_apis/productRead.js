@@ -1,7 +1,7 @@
 import connectMongo from '../../../utils/connectMongo';
 import Productschema from '../schema/product'
-// Login
-const addtoOrder = async(req, res) => {
+// read
+const ReadProduct = async(req, res) => {
     
     try {
         await connectMongo();
@@ -12,9 +12,9 @@ const addtoOrder = async(req, res) => {
         // return new product
         res.status(200).json({"Products": Product});
     } catch (e) {
-        res.status(202).json({ err: 'Order Not Found' });
+        res.status(202).json({ err: 'Product not Found' });
     }
     
 };
 
-export default addtoOrder
+export default ReadProduct

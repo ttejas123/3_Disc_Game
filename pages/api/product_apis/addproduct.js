@@ -1,7 +1,7 @@
 import connectMongo from '../../../utils/connectMongo';
 import Productschema from '../schema/product'
-// Login
-const Login = async(req, res) => {
+// Addproduct
+const Addproduct = async(req, res) => {
     const Name = req.body.Name;
     const Price = req.body.Price;
 
@@ -19,4 +19,4 @@ const Login = async(req, res) => {
     
 };
 
-export default Login
+export default Addproduct
