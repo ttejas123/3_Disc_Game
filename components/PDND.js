@@ -11,7 +11,7 @@ function PDND({dropArea = false}) {
             {
                 state ? (<div className='flex relative overflow-y-auto h-36' onClick={()=> setState((pre)=> {return !pre})}>
                     {paragraph}
-                    <label className=' shadow-xl w-8 h-8 ml-5 absolute border-green-200 font-bold border  rounded-full top-[-15%] right-0 text-center text-[10px] bg-white flex items-center justify-center'>✏️</label>
+                    <label className=' shadow-xl w-8 h-8 ml-5 absolute border-green-200 font-bold border  rounded-full top-[0%] right-0 text-center text-[10px] bg-white flex items-center justify-center'>✏️</label>
                 </div>) : (
                     <div className='flex '>
                         <textarea rows={6} cols={40} ref={h1dataRef} className="rounded-md bg-orange-50 mr-2 text-[12px] font-normal px-5 flex items-center justify-center" placeholder='Add Paragraph text' />
