@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import GenarateNonce from '../utils/genarateNonce';
 
-function Die({count, setCount, setUpDie, spinFix, fixer}) {
+export default function Die({count, setCount, setUpDie, spinFix, fixer}) {
   const [animate, setAnimate] = useState(false); 
   const [fixAnimate, setFixAnimate] = useState(false)
   
@@ -42,5 +42,3 @@ function Die({count, setCount, setUpDie, spinFix, fixer}) {
     </div>
   )
 }
-
-export default Die
