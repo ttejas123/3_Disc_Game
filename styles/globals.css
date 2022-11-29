@@ -48,3 +48,45 @@ div::-webkit-scrollbar {
     height: 100%;
   }
 }
+
+.disc-1{
+  background: url('../assets/ui/dise1.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  /* filter: grayscale(100%); */
+}
+
+.disc-2{
+  background: url('../assets/ui/dise2.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  /* filter: grayscale(100%); */
+}
+
+.disc-3{
+  background: url('../assets/ui/dise3.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  /* filter: grayscale(100%); */
+}
+
+.disc-4{
+  background: url('../assets/ui/dise4.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  /* filter: grayscale(100%); */
+}
+
+.disc-5{
+  background: url('../assets/ui/dise5.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  /* filter: grayscale(100%); */
+}
+
+.disc-6{
+  background: url('../assets/ui/dise6.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  /* filter: grayscale(100%); */
+}
