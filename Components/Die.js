@@ -1,3 +1,4 @@
+import { Head } from 'next/document';
 import React, {useState} from 'react'
 import GenarateNonce from '../utils/GenarateNonce'
 
@@ -23,6 +24,7 @@ function Die({count, setCount, setUpDie, spinFix, fixer}) {
 
   return (
     <div className='mx-5'>
+
     <div className={`${animate ? ("animate-bounce"): ("")} w-48 h-48 rounded-2xl  flex justify-center items-center text-red-200  shadow-2xl text-4xl disc-${count}`}>
       {count == 0 && (count)}
     </div>
