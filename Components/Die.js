@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import genarateNonce from '../utils/genarateNonce'
+import GenarateNonce from '../utils/GenarateNonce'
 
 function Die({count, setCount, setUpDie, spinFix, fixer}) {
     const [animate, setAnimate] = useState(false); 
@@ -8,7 +8,7 @@ function Die({count, setCount, setUpDie, spinFix, fixer}) {
   function click () {
     setAnimate(true);
     setTimeout(()=> {
-      setCount(genarateNonce());
+      setCount(GenarateNonce());
       setAnimate(false);
     }, 1500)
   }
