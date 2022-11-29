@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { useState } from 'react'
-import Die from './Die'
+import Die from '../Components/Die';
 
 export default function Home() {
   const [animate, setAnimate] = useState(false); 
