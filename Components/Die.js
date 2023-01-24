@@ -1,4 +1,3 @@
-import { Head } from 'next/document';
 import React, {useState} from 'react'
 import GenarateNonce from '../utils/GenarateNonce'
 
