@@ -4,16 +4,9 @@ WORKDIR /var/app
 
 COPY package.json ./
 
-RUN npm install
+RUN npm install --loglevel verbose
 
 COPY . .
-
-ENV DATABASE_URL="file:dev.db" \
-    NEXTAUTH_URL="http://localhost:3000" \
-    DISCORD_CLIENT_ID="" \
-    DISCORD_CLIENT_SECRET=""
-
-RUN npm run postinstall 
 
 EXPOSE 3000
 
